@@ -4,7 +4,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { lat: null, lon: null };
+    this.state = { lat: null, lon: null, errorMessage: null };
   }
 
   render() {
@@ -15,13 +15,19 @@ class App extends Component {
           lon: position.coords.longitude,
         });
       },
-      (err) => console.log(err)
+      (err) =>
+        this.setState({
+          errorMessage: err.message,
+        })
     );
 
     return (
       <div>
-        <h1>Lat: {this.state.lat}</h1>
-        <h1>Lon: {this.state.lon}</h1>
+        <div>
+          <h1>Lat: {this.state.lat}</h1>
+          <h1>Lon: {this.state.lon}</h1>
+        </div>
+        <h1>Error: {this.state.errorMessage}</h1>
       </div>
     );
   }
