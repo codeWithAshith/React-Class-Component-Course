@@ -9,10 +9,16 @@ class SeasonDisplay extends Component {
     }
   };
   render() {
+    const season = this.getSeason(this.props.lat, this.props.month);
+    const text =
+      season === "Summer" ? "Lets hit the beach" : "Burr, it is chilly";
+    const icon = season === "Summer" ? "sun" : "snowflake";
+
     return (
       <div>
-        <h1>Display Season</h1>
-        <h2>{this.getSeason(this.props.lat, this.props.month)}</h2>
+        <i className={`${icon} icon`} />
+        <h2>{text}</h2>
+        <i className={`${icon} icon`} />
       </div>
     );
   }
