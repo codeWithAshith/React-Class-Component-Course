@@ -1,4 +1,5 @@
 import { Component } from "react";
+import SeasonDisplay from "./SeasonDisplay";
 
 class App extends Component {
   state = { lat: null, lon: null, errorMessage: null };
@@ -23,17 +24,11 @@ class App extends Component {
     }
 
     if (!this.state.errorMessage && this.state.lat) {
-      return (
-        <div>
-          <h1>Lat: {this.state.lat}</h1>
-          <h1>Lon: {this.state.lon}</h1>
-        </div>
-      );
+      return <SeasonDisplay lat={this.state.lat} lon={this.state.lon} />;
     }
 
     return <div>Loading!</div>;
   }
-  
 }
 
 export default App;
