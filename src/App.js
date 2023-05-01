@@ -1,10 +1,9 @@
 import { Component } from "react";
-import SeasonApp from "./01. SeasonDisplay/SeasonApp";
+import ImagesApp from "./02. Images/ImagesApp";
+
 class App extends Component {
-
-
   render() {
-    return <SeasonApp></SeasonApp>;
+    return <ImagesApp></ImagesApp>;
   }
 }
 
