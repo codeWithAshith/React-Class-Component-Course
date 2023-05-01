@@ -23,11 +23,14 @@ class App extends Component {
 
     return (
       <div>
-        <div>
-          <h1>Lat: {this.state.lat}</h1>
-          <h1>Lon: {this.state.lon}</h1>
-        </div>
-        <h1>Error: {this.state.errorMessage}</h1>
+        {this.state.lat ? (
+          <div>
+            <h1>Lat: {this.state.lat}</h1>
+            <h1>Lon: {this.state.lon}</h1>
+          </div>
+        ) : (
+          <h1>Error: {this.state.errorMessage}</h1>
+        )}
       </div>
     );
   }
