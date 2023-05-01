@@ -27,7 +27,7 @@ class App extends Component {
       return <SeasonDisplay lat={this.state.lat} month={new Date().getMonth} />;
     }
 
-    return <Spinner />;
+    return <Spinner message="Please accept the location request" />;
   }
 }
 

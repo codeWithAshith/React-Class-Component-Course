@@ -10,4 +10,8 @@ class Spinner extends Component {
   }
 }
 
+Spinner.defaultProps = {
+  message: "Loading...",
+};
+
 export default Spinner;
