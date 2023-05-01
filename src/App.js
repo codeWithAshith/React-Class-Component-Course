@@ -7,13 +7,36 @@ class App extends Component {
     this.state = { lat: null, lon: null, errorMessage: null };
   }
 
+  // Lifecycle methods
+
+  // -- ComponentDidMount
+  // -- ComponentDidUpdate
+  // -- ComponentWillUmmount - called for clean up
+
+  // Other lifecycle menthods
+
+  // -- shouldComponentUpdate
+  // -- getDrivedStateFromProps
+  // -- getSnapshotBeforeUpdate
+
+  componentDidMount() {
+    console.log(
+      "Component loaded - called when the compoenent loads for the first time"
+    );
+  }
+
+  componentDidUpdate() {
+    console.log("Component updated - called when the state is updated");
+  }
+
   render() {
     window.navigator.geolocation.getCurrentPosition(
       (position) => {
-        this.setState({
-          lat: position.coords.latitude,
-          lon: position.coords.longitude,
-        });
+        if (!this.state.lat)
+          this.setState({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          });
       },
       (err) =>
         this.setState({
