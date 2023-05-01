@@ -1,33 +1,7 @@
 import { Component } from "react";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { lat: null, lon: null, errorMessage: null };
-  }
-
-  // Lifecycle methods
-
-  // -- ComponentDidMount
-  // -- ComponentDidUpdate
-  // -- ComponentWillUmmount - called for clean up
-
-  // Other lifecycle menthods
-
-  // -- shouldComponentUpdate
-  // -- getDrivedStateFromProps
-  // -- getSnapshotBeforeUpdate
-
-  componentDidMount() {
-    console.log(
-      "Component loaded - called when the compoenent loads for the first time"
-    );
-  }
-
-  componentDidUpdate() {
-    console.log("Component updated - called when the state is updated");
-  }
+  state = { lat: null, lon: null, errorMessage: null };
 
   render() {
     window.navigator.geolocation.getCurrentPosition(
@@ -44,19 +18,22 @@ class App extends Component {
         })
     );
 
-    return (
-      <div>
-        {this.state.lat ? (
-          <div>
-            <h1>Lat: {this.state.lat}</h1>
-            <h1>Lon: {this.state.lon}</h1>
-          </div>
-        ) : (
-          <h1>Error: {this.state.errorMessage}</h1>
-        )}
-      </div>
-    );
+    if (this.state.errorMessage && !this.state.lat) {
+      return <div>Error: {this.state.errorMessage}</div>;
+    }
+
+    if (!this.state.errorMessage && this.state.lat) {
+      return (
+        <div>
+          <h1>Lat: {this.state.lat}</h1>
+          <h1>Lon: {this.state.lon}</h1>
+        </div>
+      );
+    }
+
+    return <div>Loading!</div>;
   }
+  
 }
 
 export default App;
