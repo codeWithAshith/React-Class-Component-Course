@@ -5,7 +5,7 @@ import Spinner from "./Spinner";
 class App extends Component {
   state = { lat: null, errorMessage: null };
 
-  render() {
+  componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
       (position) => {
         if (!this.state.lat)
@@ -18,7 +18,9 @@ class App extends Component {
           errorMessage: err.message,
         })
     );
+  }
 
+  renderContent() {
     if (this.state.errorMessage && !this.state.lat) {
       return <div>Error: {this.state.errorMessage}</div>;
     }
@@ -28,6 +30,10 @@ class App extends Component {
     }
 
     return <Spinner message="Please accept the location request" />;
+  }
+
+  render() {
+    return <div>{this.renderContent()}</div>;
   }
 }
 
