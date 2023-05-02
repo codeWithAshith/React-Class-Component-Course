@@ -1,12 +1,13 @@
 import { Component } from "react";
 import SearchBar from "./SearchBar";
+import ImageList from "./ImageList";
 
 // https://unsplash.com/developers
 const baseUrl = "https://api.unsplash.com/search/photos";
 const clientId = "7_Ep1kcx5FU-RXd0nRkyujZMEn0sYEhZhPhFn8Ck1LU";
 
 class ImagesApp extends Component {
-  state = { term: "" };
+  state = { term: "", images: [] };
 
   handleInputChange = (event) => {
     this.setState({ term: event.target.value });
@@ -19,9 +20,12 @@ class ImagesApp extends Component {
       const response = await fetch(
         `${baseUrl}?client_id=${clientId}&page=1&query=${this.state.term}`
       );
-      const images = await response.images();
+      const images = await response.text();
 
-      console.log(JSON.parse(images));
+      this.setState({
+        term: this.state.term,
+        images: JSON.parse(images).results,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -35,6 +39,7 @@ class ImagesApp extends Component {
           term={this.state.term}
           handleInputChange={this.handleInputChange}
         />
+        <ImageList images={this.state.images} />
       </div>
     );
   }
